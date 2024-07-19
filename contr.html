@@ -1,0 +1,195 @@
+<!doctype html>
+<html lang="ru">
+  <head>
+    <style>
+      * {
+        margin: 0;
+        padding: 0;
+        box-sizing: border-box;
+      }
+
+      body {
+        font-family: "Helvetica Neue", "Helvetica", "Arial", sans-serif;
+        font-size: 20px;
+        line-height: 1.5;
+      }
+
+      h1 {
+        font-size: 2em;
+      }
+
+      img {
+        max-width: 100%;
+      }
+
+      @media print {
+        .slide {
+          width: 100vw;
+          height: 100vh;
+          overflow: hidden;
+          padding: 0 1em;
+        }
+        nav {
+          width: 100vw;
+          height: 100vh;
+        }
+      }
+
+      @media screen {
+        article {
+          width: 100vw;
+          height: 100vh;
+          margin: 0 auto;
+          display: grid;
+          grid-template-rows: 99fr 1fr;
+          grid-template-areas: 
+            "slides"
+            "nav";
+        }
+        .slides {
+          grid-area: slides;
+        }
+        nav {
+          grid-area: nav;
+        }
+        .slides {
+          width: 100%;
+          height: 100%;
+          display: flex;
+          align-items: center;
+          flex-flow: row nowrap;
+          overflow: scroll;
+          scroll-snap-type: both mandatory;
+          scroll-behavior: smooth;
+        }
+        
+        .slide {
+          box-shadow: 1px 1px 10px rgb(0, 0, 0, 0.2);
+          scroll-snap-align: center;
+          width: 98%;
+          height: 100%;
+          margin: 0 1%;
+          overflow: hidden;
+          padding: 1em;
+          flex: none;
+        }
+        nav {
+          display: flex;
+          justify-content: center;
+          h2 {
+            display: none;
+          }
+          ol {
+            display: flex;
+            gap: 4em; 
+            list-style-position: inside;
+            padding: 0;
+          }
+          ol li::marker {
+            font-size: initial;
+          }
+          ol li {
+            font-size: 0;
+          }
+        }
+      }
+      #intro {
+        padding: 2em;
+        @media (orientation: landscape) {
+          display: flex;
+          align-items: center;
+          h1 {
+            flex: 1.5;
+          }
+          gap: 2em;
+          figure {
+            flex: 1;
+          }
+        }
+
+        h1 {
+          font-size: 6em;
+          text-align: center;
+        }
+        figure {
+          filter: saturate(30%);
+        }
+         background-image: radial-gradient(#ccc 10%, transparent 10%),
+                           radial-gradient(#ccc 10%, transparent 10%);
+        background-size: 10px 10px;
+        color: #333a48;
+      }
+    </style>
+  </head>
+  <body>
+    <article>
+      <nav>
+        <h2> Содержание </h2>
+        <ol>
+          <a href="#intro"> 
+            <li> Начало </li>
+          </a>
+          <a href="#initial-response"> 
+            <li> 
+              К вам пришли представители власти как их встречать?  
+            </li>
+          </a>
+          <a>
+            <li>
+            </li>
+          </a>
+        </ol>
+      </nav>
+      <section class="slides"> 
+        <section class="slide" id="intro">
+          <h1> Проверки </h1>
+          <figure>
+            <img src="ministry-of-justice-emblem.png">
+          </figure>
+        </section>
+        <section class="slide" id="initial-response">
+          <h2> К вам пришли представители госорганов 
+               как их встречать? </h2>
+          <ul>
+            <li>
+              Обязательная вежливая и внимательная проверка 
+              документов и служебных удостоверений, 
+              данные которых переписываются.
+            </li>
+            <li>
+              Регистрация в вахтовой книге, тетради учета посетителей или аналогичной 
+              (не путайте с журналом учета проверок, 
+               туда записи вносятся по окончании проверки).
+            </li>
+            <li>
+              Доклад руководителю и представителю администрации 
+              уполномоченному общаться с проверяющими.
+            </li>
+          </ul>
+        </section>
+
+        <section class="slide">
+          <h2> К вам пришли представители госорганов 
+               как их встречать? </h2>
+          <ul>
+            <li>
+              Обязательная вежливая и внимательная проверка 
+              документов и служебных удостоверений, 
+              данные которых переписываются.
+            </li>
+            <li>
+              Регистрация в вахтовой книге, тетради учета посетителей или аналогичной 
+              (не путайте с журналом учета проверок, 
+               туда записи вносятся по окончании проверки).
+            </li>
+            <li>
+              Доклад руководителю и представителю администрации 
+              уполномоченному общаться с проверяющими.
+            </li>
+          </ul>
+        </section>
+      </section>
+
+    </article>
+  <body>
+</html>
