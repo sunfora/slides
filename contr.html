@@ -79,6 +79,9 @@
           h2 {
             display: none;
           }
+          ol a {
+            text-decoration: none;
+          }
           ol {
             display: flex;
             gap: 4em; 
@@ -90,6 +93,15 @@
           }
           ol li {
             font-size: 0;
+          }
+          ol a {
+            transition: 0.1s;
+          }
+          ol .current {
+            font-weight: bold;
+            display: block;
+            transform: rotate(45deg);
+            transition: 0.5s;
           }
         }
       }
@@ -126,22 +138,10 @@
       <nav>
         <h2> Содержание </h2>
         <ol>
-          <a href="#intro"> 
-            <li> Начало </li>
-          </a>
-          <a href="#initial-response"> 
-            <li> 
-              К вам пришли представители власти как их встречать?  
-            </li>
-          </a>
-          <a>
-            <li>
-            </li>
-          </a>
         </ol>
       </nav>
       <section class="slides"> 
-        <section class="slide" id="intro">
+        <section class="slide" id="intro" data-name="Начало">
           <h1> Проверки </h1>
           <figure>
             <img src="ministry-of-justice-emblem.png">
@@ -167,29 +167,81 @@
             </li>
           </ul>
         </section>
-
-        <section class="slide">
-          <h2> К вам пришли представители госорганов 
-               как их встречать? </h2>
-          <ul>
-            <li>
-              Обязательная вежливая и внимательная проверка 
-              документов и служебных удостоверений, 
-              данные которых переписываются.
-            </li>
-            <li>
-              Регистрация в вахтовой книге, тетради учета посетителей или аналогичной 
-              (не путайте с журналом учета проверок, 
-               туда записи вносятся по окончании проверки).
-            </li>
-            <li>
-              Доклад руководителю и представителю администрации 
-              уполномоченному общаться с проверяющими.
-            </li>
-          </ul>
-        </section>
       </section>
 
     </article>
   <body>
+
+  <script>
+    function Slides(presentation) {
+      this.presentation = presentation;
+      this.navList = this.presentation.querySelector("nav ol");
+      this.slides = this.presentation.querySelector(".slides");
+      this.setupNavigation();
+
+      this.links = this.presentation.querySelectorAll("nav ol a");
+      this.length = this.slides.querySelectorAll(".slide").length;
+      this.actualize();
+      this.slides.addEventListener(
+        "scroll", () => this.actualize());
+    }
+
+    Slides.prototype.actualize = function() {
+      const factor = this.slides.scrollLeft 
+                   / this.slides.scrollLeftMax;
+      const id = Math.round(factor * (this.length - 1));
+
+      if (this.id !== id) {
+        if (this.id !== undefined) {
+          this.links[this.id]
+              .classList
+              .remove("current");
+        }
+
+        this.links[id]
+            .classList
+            .add("current");
+
+        this.id = id;
+      }
+    };
+    
+    function firstHeaderName(item) {
+      for (const order of [1, 2, 3, 4, 5, 6]) {
+        const h = item.querySelector(`h${order}`);
+        if (h !== null) {
+          return h.textContent;
+        }
+      }
+      return null;
+    }
+
+    function getSlideName(slide) {
+      return slide.getAttribute("data-name")
+                 ?? firstHeaderName(slide)
+                 ?? "untitled slide";
+    }
+
+    Slides.prototype.setupNavigation = function() {
+      const slides = this.slides.querySelectorAll(".slide");
+
+      for (const slide of slides) {
+        let id = slide.getAttribute("id");
+        if (id === null) {
+          id = crypto.randomUUID();
+          slide.setAttribute("id", id);
+        }
+        const name = getSlideName(slide);
+
+        const link = document.createElement("a");
+        const li = document.createElement("li");
+        li.textContent = name;
+        link.append(li);
+        link.setAttribute("href", `#${id}`);
+        this.navList.append(link);
+      }
+    }
+
+    const slides = new Slides(document.querySelector("article"));
+  </script>
 </html>
