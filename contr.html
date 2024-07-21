@@ -2,10 +2,20 @@
 <html lang="ru">
   <head>
     <style>
-      * {
-        margin: 0;
-        padding: 0;
-        box-sizing: border-box;
+      @layer {
+        * {
+          margin: 0;
+          padding: 0;
+          box-sizing: border-box;
+        }
+
+        .slide * {
+          all: revert;
+        }
+
+        nav * {
+          all: revert;
+        }
       }
 
       body {
@@ -31,36 +41,53 @@
         }
         nav {
           width: 100vw;
-          height: 100vh;
+          min-height: 100vh;
+          page-break-after: always;
+          padding: 1em;
         }
       }
 
       @media screen {
-        article {
+        /* pin presentation to full screen */
+        body {
           width: 100vw;
           height: 100vh;
+
+          .presentation {
+            width: 100%;
+            height: 100%;
+          }
+        }
+
+        .presentation {
           margin: 0 auto;
           display: grid;
-          grid-template-rows: 99fr 1fr;
-          grid-template-areas: 
-            "slides"
-            "nav";
+          grid-template-rows: repeat(12, 1fr);
+          grid-template-columns: repeat(12, 1fr);
         }
+
         .slides {
-          grid-area: slides;
+          grid-column: 1 / 13;
+          grid-row: 1 / 12;
         }
+
         nav {
-          grid-area: nav;
+          grid-column: 4 / 11;
+          grid-row: 12;
         }
         .slides {
           width: 100%;
-          height: 100%;
           display: flex;
           align-items: center;
           flex-flow: row nowrap;
-          overflow: scroll;
-          scroll-snap-type: both mandatory;
-          scroll-behavior: smooth;
+          overflow-x: scroll;
+          scroll-snap-type: x mandatory;
+
+            scroll-behavior: smooth;
+          /* 
+           * unfortunately doesn't work on Chrome 
+           *
+           */
         }
         
         .slide {
@@ -73,41 +100,79 @@
           padding: 1em;
           flex: none;
         }
-        nav {
-          display: flex;
-          justify-content: center;
-          h2 {
-            display: none;
-          }
-          ol a {
-            text-decoration: none;
-          }
-          ol {
-            display: flex;
-            gap: 4em; 
-            list-style-position: inside;
-            padding: 0;
-          }
-          ol li::marker {
-            font-size: initial;
-          }
-          ol li {
+
+        /* hide header for list */
+        nav h2 {
+          display: none;
+        }
+
+        /* remove default styling */ 
+        nav ol {
+          margin: 0;
+          padding: 0;
+        }
+
+        a {
+          text-decoration: none;
+        }
+
+        /* hide any text in links */
+        nav ol {
+          list-style-position: inside;
+          li {
             font-size: 0;
-          }
-          ol a {
-            transition: 0.1s;
-          }
-          ol .current {
-            font-weight: bold;
-            display: block;
-            transform: rotate(45deg);
-            transition: 0.5s;
+            &::marker {
+              font-size: initial;
+            }
           }
         }
+        
+        /* make list horizontal */
+        nav ol {
+          height: 100%;
+
+          /* 5 items in a row */
+          display: flex;
+          flex-flow: row nowrap;
+          a {
+            width: 20%;
+            flex: none;
+          }
+          
+          /* add scrolling */
+          overflow-x: scroll;
+          overflow-y: hidden;
+
+          scroll-snap-type: x mandatory;
+          scroll-behavior: smooth;
+          scrollbar-width: none;
+
+          a {
+            scroll-snap-align: center;
+          }
+        }
+        
+        /* position number in center */ 
+        nav ol a {
+          display: flex;
+          align-items: center;
+          justify-content: center;
+        }
+        
+        /* add animation */
+        nav li {
+          transition: 0.5s;
+        }
+
+        nav a.current li {
+          transform: rotate(30deg);
+          font-weight: bold;
+        }
       }
+
       #intro {
         padding: 2em;
-        @media (orientation: landscape) {
+        @container (orientation: landscape) {
           display: flex;
           align-items: center;
           h1 {
@@ -117,8 +182,9 @@
           figure {
             flex: 1;
           }
+          background-color: red;
         }
-
+        
         h1 {
           font-size: 6em;
           text-align: center;
@@ -126,20 +192,20 @@
         figure {
           filter: saturate(30%);
         }
-         background-image: radial-gradient(#ccc 10%, transparent 10%),
-                           radial-gradient(#ccc 10%, transparent 10%);
-        background-size: 10px 10px;
+         background-image: radial-gradient(#ccc 10%, transparent 10%); 
+         background-size: 10px 10px;
         color: #333a48;
       }
     </style>
   </head>
   <body>
-    <article>
+    <article class="presentation">
       <nav>
         <h2> Содержание </h2>
         <ol>
         </ol>
       </nav>
+
       <section class="slides"> 
         <section class="slide" id="intro" data-name="Начало">
           <h1> Проверки </h1>
@@ -148,24 +214,123 @@
           </figure>
         </section>
         <section class="slide" id="initial-response">
-          <h2> К вам пришли представители госорганов 
+          <h2> к вам пришли представители госорганов 
                как их встречать? </h2>
           <ul>
             <li>
-              Обязательная вежливая и внимательная проверка 
+              обязательная вежливая и внимательная проверка 
               документов и служебных удостоверений, 
               данные которых переписываются.
             </li>
             <li>
-              Регистрация в вахтовой книге, тетради учета посетителей или аналогичной 
+              регистрация в вахтовой книге, тетради учета посетителей или аналогичной 
               (не путайте с журналом учета проверок, 
                туда записи вносятся по окончании проверки).
             </li>
             <li>
-              Доклад руководителю и представителю администрации 
+              доклад руководителю и представителю администрации 
               уполномоченному общаться с проверяющими.
             </li>
           </ul>
+        </section>
+
+        <section class="slide">
+          <h2>  3 </h2>
+        </section>
+        <section class="slide">
+          <h2>  4 </h2>
+        </section>
+        <section class="slide">
+          <h2>  5 </h2>
+        </section>
+        <section class="slide">
+          <h2>  6 </h2>
+        </section>
+        <section class="slide">
+          <h2>  7 </h2>
+        </section>
+        <section class="slide">
+          <h2>  8 </h2>
+        </section>
+        <section class="slide">
+          <h2>  9 </h2>
+        </section>
+        <section class="slide">
+          <h2>  10 </h2>
+        </section>
+        <section class="slide">
+          <h2>  11 </h2>
+        </section>
+        <section class="slide">
+          <h2>  12 </h2>
+        </section>
+        <section class="slide">
+          <h2>  13 </h2>
+        </section>
+        <section class="slide">
+          <h2>  14 </h2>
+        </section>
+        <section class="slide">
+          <h2>  15 </h2>
+        </section>
+        <section class="slide">
+          <h2>  16 </h2>
+        </section>
+        <section class="slide">
+          <h2>  17 </h2>
+        </section>
+        <section class="slide">
+          <h2>  18 </h2>
+        </section>
+
+
+        <section class="slide">
+          <h2>  19 </h2>
+        </section>
+        <section class="slide">
+          <h2>  20 </h2>
+        </section>
+        <section class="slide">
+          <h2>  21 </h2>
+        </section>
+        <section class="slide">
+          <h2>  22 </h2>
+        </section>
+        <section class="slide">
+          <h2>  23 </h2>
+        </section>
+        <section class="slide">
+          <h2>  24 </h2>
+        </section>
+        <section class="slide">
+          <h2>  25 </h2>
+        </section>
+        <section class="slide">
+          <h2>  26 </h2>
+        </section>
+        <section class="slide">
+          <h2>  27 </h2>
+        </section>
+        <section class="slide">
+          <h2>  28 </h2>
+        </section>
+        <section class="slide">
+          <h2>  29 </h2>
+        </section>
+        <section class="slide">
+          <h2>  30 </h2>
+        </section>
+        <section class="slide">
+          <h2>  31 </h2>
+        </section>
+        <section class="slide">
+          <h2>  32 </h2>
+        </section>
+        <section class="slide">
+          <h2>  33 </h2>
+        </section>
+        <section class="slide">
+          <h2>  34 </h2>
         </section>
       </section>
 
@@ -173,74 +338,110 @@
   <body>
 
   <script>
-    function Slides(presentation) {
-      this.presentation = presentation;
-      this.navList = this.presentation.querySelector("nav ol");
-      this.slides = this.presentation.querySelector(".slides");
-      this.setupNavigation();
-
-      this.links = this.presentation.querySelectorAll("nav ol a");
-      this.length = this.slides.querySelectorAll(".slide").length;
-      this.actualize();
-      this.slides.addEventListener(
-        "scroll", () => this.actualize());
-    }
-
-    Slides.prototype.actualize = function() {
-      const factor = this.slides.scrollLeft 
-                   / this.slides.scrollLeftMax;
-      const id = Math.round(factor * (this.length - 1));
-
-      if (this.id !== id) {
-        if (this.id !== undefined) {
-          this.links[this.id]
-              .classList
-              .remove("current");
-        }
-
-        this.links[id]
-            .classList
-            .add("current");
-
-        this.id = id;
-      }
-    };
-    
-    function firstHeaderName(item) {
-      for (const order of [1, 2, 3, 4, 5, 6]) {
-        const h = item.querySelector(`h${order}`);
-        if (h !== null) {
-          return h.textContent;
-        }
-      }
-      return null;
-    }
-
-    function getSlideName(slide) {
-      return slide.getAttribute("data-name")
-                 ?? firstHeaderName(slide)
-                 ?? "untitled slide";
-    }
-
-    Slides.prototype.setupNavigation = function() {
-      const slides = this.slides.querySelectorAll(".slide");
-
-      for (const slide of slides) {
-        let id = slide.getAttribute("id");
-        if (id === null) {
-          id = crypto.randomUUID();
-          slide.setAttribute("id", id);
-        }
-        const name = getSlideName(slide);
+    class Slide {
+      constructor(slide, index, id=null, name=null) {
+        this.data = slide;
+        this.index = index;
+        
+        this.setName(name);
+        this.setId(id);
 
         const link = document.createElement("a");
         const li = document.createElement("li");
-        li.textContent = name;
+        li.textContent = this.name();
         link.append(li);
-        link.setAttribute("href", `#${id}`);
-        this.navList.append(link);
+        link.setAttribute("href", `#${this.id()}`);
+        this.link = link;
+      }
+
+      firstHeader() {
+        for (const index of [1, 2, 3, 4, 5, 6]) {
+          const h = this.data.querySelector(`h${index}`);
+          if (h !== null) {
+            return h.textContent;
+          }
+        }
+        return null;
+      }
+
+      setName(name) {
+        return this.data.setAttribute("data-name", 
+            name ?? this.data.getAttribute("data-name")
+                 ?? this.firstHeader()
+                 ?? `slide ${this.index + 1}`
+        );
+      }
+
+      name() {
+        return this.data.getAttribute("data-name")
+      }
+      
+      setId(id) {
+        this.data.setAttribute("id",
+          id ?? this.data.getAttribute("id")
+             ?? `slide-${this.index + 1}`
+        );
+      }
+
+      id() {
+        return this.data.getAttribute("id");
+      }
+
+      isSelected() {
+        return this.link.classList.contains("current");
+      }
+
+      select() {
+        this.link.classList.add("current");
+      }
+      unselect() {
+        this.link.classList.remove("current");
       }
     }
+
+    function Slides(presentation) {
+      this.presentation = presentation;
+      this.navList = this.presentation.querySelector("nav ol");
+      this.slideWindow = this.presentation.querySelector(".slides");
+      
+      // register slides 
+      const all = this.slideWindow
+                      .querySelectorAll(".slide");
+      this.slides = [...all].map(
+        (data, index) => new Slide(data, index));
+
+      // activate navigation 
+      this.slides.forEach(
+        slide => this.navList.append(slide.link));
+      this.length = this.slides.length;
+      this.actualize();
+      
+      this.slideWindow.addEventListener(
+        "scroll", 
+        () => this.actualize()
+      );
+
+      const isChromium = !!window.chrome;
+      this.slideWindow.addEventListener(
+            isChromium? "scrollend" : "scroll", 
+            () => this.current.link.scrollIntoView({
+              behavior: "auto",
+              inline: "center"
+            })
+      );
+    }
+
+    Slides.prototype.actualize = function() {
+      const slideWidth = this.slideWindow.scrollWidth / (this.length);
+      const index = Math.round(this.slideWindow.scrollLeft / slideWidth);
+      
+      if (this.current) {
+        this.current.unselect();
+      }
+
+      this.current = this.slides[index]; 
+      this.current.select();
+    };
 
     const slides = new Slides(document.querySelector("article"));
   </script>
