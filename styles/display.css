@@ -1,0 +1,122 @@
+/* pin presentation to full screen */
+body {
+  width: 100vw;
+  height: 100vh;
+
+  .presentation {
+    width: 100%;
+    height: 100%;
+  }
+}
+
+.presentation {
+  margin: 0 auto;
+  display: grid;
+  grid-template-rows: repeat(12, 1fr);
+  grid-template-columns: repeat(12, 1fr);
+}
+
+.slides {
+  grid-column: 1 / 13;
+  grid-row: 1 / 12;
+}
+
+nav {
+  grid-column: 4 / 11;
+  grid-row: 12;
+}
+
+.slides {
+  display: flex;
+  align-items: center;
+  flex-flow: row nowrap;
+  overflow-x: scroll;
+  scroll-snap-type: x mandatory;
+  scroll-behavior: smooth;
+
+  .slide {
+    scroll-snap-align: center;
+  }
+}
+
+.slide {
+  flex: none;
+
+  padding: 1em;
+
+  width: 98%;
+  height: 100%;
+  margin: 0 1%;
+
+  overflow: hidden;
+
+  box-shadow: 1px 1px 10px rgb(0, 0, 0, 0.2);
+}
+
+/* hide header for list */
+nav h2 {
+  display: none;
+}
+
+/* remove default styling */ 
+nav ol {
+  margin: 0;
+  padding: 0;
+}
+
+a {
+  text-decoration: none;
+}
+
+/* hide any text in links */
+nav ol {
+  list-style-position: inside;
+  li {
+    font-size: 0;
+    &::marker {
+      font-size: initial;
+    }
+  }
+}
+
+/* make list horizontal */
+nav ol {
+  height: 100%;
+
+  /* 5 items in a row */
+  display: flex;
+  flex-flow: row nowrap;
+  a {
+    width: 20%;
+    flex: none;
+  }
+  
+  /* add scrolling */
+  overflow-x: scroll;
+  overflow-y: hidden;
+
+  scroll-snap-type: x mandatory;
+  scroll-behavior: smooth;
+  scrollbar-width: none;
+
+  a {
+    scroll-snap-align: center;
+  }
+}
+
+/* position number in center */ 
+nav ol a {
+  display: flex;
+  align-items: center;
+  justify-content: center;
+}
+
+/* add animation */
+nav li {
+  transition: 0.5s;
+}
+
+nav a.current li {
+  transform: rotate(30deg);
+  font-weight: bold;
+}
