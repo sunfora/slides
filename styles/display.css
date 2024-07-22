@@ -2,6 +2,7 @@
 body {
   width: 100vw;
   height: 100vh;
+  background: red;
 
   .presentation {
     width: 100%;
