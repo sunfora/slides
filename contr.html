@@ -1,38 +1,32 @@
 <!doctype html>
 <html lang="ru">
   <head>
+    <link rel="stylesheet" href="styles/reset.css">
     <link rel="stylesheet" media="screen" href="styles/display.css">
     <link rel="stylesheet" media="print" href="styles/print.css">
 
     <style>
-      @layer {
-        * {
-          margin: 0;
-          padding: 0;
-          box-sizing: border-box;
-        }
-
-        .slide * {
-          all: revert;
-        }
-
-        nav * {
-          all: revert;
-        }
-      }
-
       body {
-        font-family: "Helvetica Neue", "Helvetica", "Arial", sans-serif;
-        font-size: 20px;
+        font-family: "Tex Gyre Heros", "Helvetica Neue", "Helvetica", "Arial", sans-serif;
+        font-size: 10px;
         line-height: 1.5;
       }
 
-      h1 {
-        font-size: 2em;
-      }
 
       img {
         max-width: 100%;
+      }
+
+      .slide {
+        --pattern-background-dots: 
+          radial-gradient(#ccc 10%, transparent 10%) 
+          center/10px 10px repeat;
+
+        font-size: 2em;
+      }
+      
+      .container {
+        container-type: size;
       }
 
       #intro {
@@ -42,23 +36,25 @@
           align-items: center;
           h1 {
             flex: 1.5;
+            margin: 0;
           }
           gap: 2em;
           figure {
             flex: 1;
           }
-          background-color: red;
         }
         
         h1 {
           font-size: 6em;
           text-align: center;
         }
+
         figure {
           filter: saturate(30%);
         }
-         background-image: radial-gradient(#ccc 10%, transparent 10%); 
-         background-size: 10px 10px;
+
+
+        background: var(--pattern-background-dots);
         color: #333a48;
       }
     </style>
@@ -71,132 +67,235 @@
         </ol>
       </nav>
 
+      <button class="fullscreen"> <img src="resize.svg"> </button>
+
       <section class="slides"> 
-        <section class="slide" id="intro" data-name="Начало">
-          <h1> Проверки </h1>
-          <figure>
-            <img src="ministry-of-justice-emblem.png">
-          </figure>
-        </section>
-        <section class="slide" id="initial-response">
-          <h2> к вам пришли представители госорганов 
-               как их встречать? </h2>
-          <ul>
-            <li>
-              обязательная вежливая и внимательная проверка 
-              документов и служебных удостоверений, 
-              данные которых переписываются.
-            </li>
-            <li>
-              регистрация в вахтовой книге, тетради учета посетителей или аналогичной 
-              (не путайте с журналом учета проверок, 
-               туда записи вносятся по окончании проверки).
-            </li>
-            <li>
-              доклад руководителю и представителю администрации 
-              уполномоченному общаться с проверяющими.
-            </li>
-          </ul>
-        </section>
-
-        <section class="slide">
-          <h2>  3 </h2>
-        </section>
-        <section class="slide">
-          <h2>  4 </h2>
-        </section>
-        <section class="slide">
-          <h2>  5 </h2>
-        </section>
-        <section class="slide">
-          <h2>  6 </h2>
-        </section>
-        <section class="slide">
-          <h2>  7 </h2>
-        </section>
-        <section class="slide">
-          <h2>  8 </h2>
-        </section>
-        <section class="slide">
-          <h2>  9 </h2>
-        </section>
-        <section class="slide">
-          <h2>  10 </h2>
-        </section>
-        <section class="slide">
-          <h2>  11 </h2>
-        </section>
-        <section class="slide">
-          <h2>  12 </h2>
-        </section>
-        <section class="slide">
-          <h2>  13 </h2>
-        </section>
-        <section class="slide">
-          <h2>  14 </h2>
-        </section>
-        <section class="slide">
-          <h2>  15 </h2>
-        </section>
-        <section class="slide">
-          <h2>  16 </h2>
-        </section>
-        <section class="slide">
-          <h2>  17 </h2>
-        </section>
-        <section class="slide">
-          <h2>  18 </h2>
-        </section>
+        <div class="container">
+          <section class="slide" id="intro" data-name="Начало">
+              <h1> Проверки </h1>
+              <figure>
+                <img src="ministry-of-justice-emblem.png">
+              </figure>
+          </section>
+        </div>
+        
+        <div class="container">
+          <section class="slide" id="initial-response">
+            <h2> к вам пришли представители госорганов 
+                 как их встречать? </h2>
+            <ul>
+              <li>
+                обязательная вежливая и внимательная проверка 
+                документов и служебных удостоверений, 
+                данные которых переписываются.
+              </li>
+              <li>
+                регистрация в вахтовой книге, тетради учета посетителей или аналогичной 
+                (не путайте с журналом учета проверок, 
+                 туда записи вносятся по окончании проверки).
+              </li>
+              <li>
+                доклад руководителю и представителю администрации 
+                уполномоченному общаться с проверяющими.
+              </li>
+            </ul>
+          </section>
+        </div>
 
 
-        <section class="slide">
-          <h2>  19 </h2>
-        </section>
-        <section class="slide">
-          <h2>  20 </h2>
-        </section>
-        <section class="slide">
-          <h2>  21 </h2>
-        </section>
-        <section class="slide">
-          <h2>  22 </h2>
-        </section>
-        <section class="slide">
-          <h2>  23 </h2>
-        </section>
-        <section class="slide">
-          <h2>  24 </h2>
-        </section>
-        <section class="slide">
-          <h2>  25 </h2>
-        </section>
-        <section class="slide">
-          <h2>  26 </h2>
-        </section>
-        <section class="slide">
-          <h2>  27 </h2>
-        </section>
-        <section class="slide">
-          <h2>  28 </h2>
-        </section>
-        <section class="slide">
-          <h2>  29 </h2>
-        </section>
-        <section class="slide">
-          <h2>  30 </h2>
-        </section>
-        <section class="slide">
-          <h2>  31 </h2>
-        </section>
-        <section class="slide">
-          <h2>  32 </h2>
-        </section>
-        <section class="slide">
-          <h2>  33 </h2>
-        </section>
-        <section class="slide">
-          <h2>  34 </h2>
-        </section>
+        <div class="container">
+          <section class="slide">
+            <h2>  3 </h2>
+          </section>
+        </div>
+
+        <div class="container">
+          <section class="slide">
+            <h2>  4 </h2>
+          </section>
+        </div>
+
+        <div class="container">
+          <section class="slide">
+            <h2>  5 </h2>
+          </section>
+        </div>
+
+        <div class="container">
+          <section class="slide">
+            <h2>  6 </h2>
+          </section>
+        </div>
+
+        <div class="container">
+          <section class="slide">
+            <h2>  7 </h2>
+          </section>
+        </div>
+
+        <div class="container">
+          <section class="slide">
+            <h2>  8 </h2>
+          </section>
+        </div>
+
+        <div class="container">
+          <section class="slide">
+            <h2>  9 </h2>
+          </section>
+        </div>
+
+        <div class="container">
+          <section class="slide">
+            <h2>  10 </h2>
+          </section>
+        </div>
+
+        <div class="container">
+          <section class="slide">
+            <h2>  11 </h2>
+          </section>
+        </div>
+
+        <div class="container">
+          <section class="slide">
+            <h2>  12 </h2>
+          </section>
+        </div>
+
+        <div class="container">
+          <section class="slide">
+            <h2>  13 </h2>
+          </section>
+        </div>
+
+        <div class="container">
+          <section class="slide">
+            <h2>  14 </h2>
+          </section>
+        </div>
+
+        <div class="container">
+          <section class="slide">
+            <h2>  15 </h2>
+          </section>
+        </div>
+
+        <div class="container">
+          <section class="slide">
+            <h2>  16 </h2>
+          </section>
+        </div>
+
+        <div class="container">
+          <section class="slide">
+            <h2>  17 </h2>
+          </section>
+        </div>
+
+        <div class="container">
+          <section class="slide">
+            <h2>  18 </h2>
+          </section>
+        </div>
+
+
+
+        <div class="container">
+          <section class="slide">
+            <h2>  19 </h2>
+          </section>
+        </div>
+
+        <div class="container">
+          <section class="slide">
+            <h2>  20 </h2>
+          </section>
+        </div>
+
+        <div class="container">
+          <section class="slide">
+            <h2>  21 </h2>
+          </section>
+        </div>
+
+        <div class="container">
+          <section class="slide">
+            <h2>  22 </h2>
+          </section>
+        </div>
+
+        <div class="container">
+          <section class="slide">
+            <h2>  23 </h2>
+          </section>
+        </div>
+
+        <div class="container">
+          <section class="slide">
+            <h2>  24 </h2>
+          </section>
+        </div>
+
+        <div class="container">
+          <section class="slide">
+            <h2>  25 </h2>
+          </section>
+        </div>
+
+        <div class="container">
+          <section class="slide">
+            <h2>  26 </h2>
+          </section>
+        </div>
+
+        <div class="container">
+          <section class="slide">
+            <h2>  27 </h2>
+          </section>
+        </div>
+
+        <div class="container">
+          <section class="slide">
+            <h2>  28 </h2>
+          </section>
+        </div>
+
+        <div class="container">
+          <section class="slide">
+            <h2>  29 </h2>
+          </section>
+        </div>
+
+        <div class="container">
+          <section class="slide">
+            <h2>  30 </h2>
+          </section>
+        </div>
+
+        <div class="container">
+          <section class="slide">
+            <h2>  31 </h2>
+          </section>
+        </div>
+
+        <div class="container">
+          <section class="slide">
+            <h2>  32 </h2>
+          </section>
+        </div>
+
+        <div class="container">
+          <section class="slide">
+            <h2>  33 </h2>
+          </section>
+        </div>
+
+        <div class="container">
+          <section class="slide">
+            <h2>  34 </h2>
+          </section>
+        </div>
       </section>
 
     </article>
@@ -309,5 +408,9 @@
     };
 
     const slides = new Slides(document.querySelector("article"));
+    document.querySelector(".fullscreen").addEventListener(
+          "click", 
+          () => slides.slideWindow.requestFullscreen()
+    );
   </script>
 </html>

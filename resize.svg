@@ -1,0 +1,38 @@
+<?xml version="1.0" encoding="UTF-8" standalone="no"?>
+<!-- Created with Inkscape (http://www.inkscape.org/) -->
+
+<svg
+   width="512"
+   height="512"
+   viewBox="0 0 512 512"
+   version="1.1"
+   id="svg1"
+   xmlns="http://www.w3.org/2000/svg"
+   xmlns:svg="http://www.w3.org/2000/svg">
+  <defs
+     id="defs1">
+    <marker
+       style="overflow:visible"
+       id="ArrowWide"
+       refX="0"
+       refY="0"
+       orient="auto-start-reverse"
+       markerWidth="1"
+       markerHeight="1"
+       viewBox="0 0 1 1"
+       preserveAspectRatio="xMidYMid">
+      <path
+         style="fill:none;stroke:context-stroke;stroke-width:1;stroke-linecap:butt"
+         d="M 3,-3 0,0 3,3"
+         transform="rotate(180,0.125,0)"
+         id="path1" />
+    </marker>
+  </defs>
+  <g
+     id="layer1">
+    <path
+       id="path6"
+       style="opacity:1;fill:#000005;fill-rule:evenodd;stroke-width:0.827634;marker-start:url(#ArrowWide);paint-order:markers fill stroke"
+       d="M 55,45 V 152.59239 H 93.96991 V 79.194853 h 85.17516 V 45 Z m 289.67184,0 v 34.194853 h 89.10966 v 73.397537 h 35.03541 V 45 Z M 55,338.81 V 458.8169 H 179.14507 V 426.9417 H 93.96991 V 338.81 Z m 378.7815,0 v 88.1317 h -89.10966 v 31.8752 H 468.81691 V 338.81 Z" />
+  </g>
+</svg>
