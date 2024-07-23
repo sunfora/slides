@@ -128,7 +128,6 @@ nav ol {
   display: flex;
   flex-flow: row nowrap;
   a {
-    height: 100%;
     width: 20%;
     flex: none;
   }
@@ -148,6 +147,7 @@ nav ol {
 
 /* position number in center */ 
 nav ol a {
+  text-overflow: clip;
   display: flex;
   align-items: center;
   justify-content: center;
