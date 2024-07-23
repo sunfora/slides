@@ -45,18 +45,18 @@
     grid-area: eagle;
   }
 
+  grid-template-areas:
+    "letters letters"
+    "eagle   eagle";
+
+  h1 {
+    justify-self: center;
+  }
+
   @media (aspect-ratio >= 4/3)  {
     grid-template-areas: "letters eagle" "letters eagle";
     figure {
       transform: translate(15vh, 15vh) scale(1.3);
-    }
-  }
-
-  @media (aspect-ratio < 4/3) {
-    grid-template-areas: "letters letters" "eagle   eagle";
-
-    h1 {
-      justify-self: center;
     }
   }
 }
