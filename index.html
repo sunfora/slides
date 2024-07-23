@@ -449,71 +449,63 @@
       }
       return 1;
     }
+    
+    function translate(cell, sorc, dest) {
+        const {width: width, height: heigth} = cell.getBoundingClientRect();
+        const [sorcY, sorcX] = sorc;
+        const [destY, destX] = dest;
+
+        if (destX === sorcX && destY === sorcY) {
+          return;
+        }
+
+        const dx = (destX - sorcX) * width;
+        const dy = (destY - sorcY) * heigth;
+        
+        const translate = cell.animate({
+          transformOrigin: 'top left',
+          transform: `translate(${dx}px, ${dy}px)`
+        }, {
+          duration: 1000,
+          easing: 'ease'
+        });
+
+        const place = () => {
+          cell.style.gridRow = dest[0];
+          cell.style.gridColumn = dest[1];
+        };
+
+        translate.onfinish = place;
+        translate.oncancel = place;
+    }
 
     function cycle() {
-      
-      const before = dump();
+      before = [...coords];
 
-      
-      
       if (iteration % 3 === 0) {
-
         coords = 
           [...coords.slice(0, 3).sort(lex), 
            ...coords.slice(3, 6).sort(lex), 
            ...coords.slice(6, 8).sort(lex), 
            ...coords.slice(8, 9)];
-        console.log(coords);
       } else {
         const src = current();
         const dest = calc(src, move(src));
         swap(src, dest); 
       }
-
-      reorderOnScreen(coords);
       
-      const after = dump();
-
-      animate(before, after);
+      cells.forEach((e, i) => {
+        translate(e, before[i], coords[i]);
+      });
+      
       iteration += 1;
     }
 
-    function dump() {
-      return cells.map(e => e.getBoundingClientRect()); 
-    }
-    
-    function animate(cold, cnew) {
-      for (let i = 0; i < cells.length; i++) {
-          const dx = cold[i].x - cnew[i].x;
-          const dy = cold[i].y - cnew[i].y;
-          
-          if (Math.abs(dx) < 1e-2 && Math.abs(dy) < 1e-2) {
-            continue;
-          }
-
-          cells[i].animate([{
-            transformOrigin: 'top left',
-            transform: `translate(${dx}px, ${dy}px)`
-          }, {
-            transformOrigin: 'top left',
-            transform: 'none'
-          }], {
-            duration: 1000,
-            easing: 'ease'
-          });
-      }
-    }
-    
     const SPEED = 1200;
     let id;
 
     function run() {
-      id = setInterval(
-        () => {
-          window.requestAnimationFrame(cycle)
-        }
-        , SPEED
-      );
+      id = setInterval(cycle, SPEED);
     }
     run();
     window.addEventListener(
