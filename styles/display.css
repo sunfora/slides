@@ -112,8 +112,13 @@ a {
 /* hide any text in links */
 nav ol {
   list-style-position: inside;
+  a {
+  
+    overflow: hidden;
+  }
   li span {
-    display: none;
+    font-size: 0;
+    line-height: 0;
   }
 }
 
