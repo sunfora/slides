@@ -504,7 +504,7 @@
       }
     }
     
-    let id = setInterval(cycle, 600);
+    let id = setInterval(cycle, 1500);
     
     window.addEventListener(
       "beforeprint",
@@ -518,7 +518,7 @@
       "afterprint",
       () => {
         reorderOnScreen(coords);
-        id = setInterval(cycle, 600);
+        id = setInterval(cycle, 1500);
       }
     );
 
