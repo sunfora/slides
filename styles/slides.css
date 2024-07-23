@@ -54,7 +54,7 @@
     }
   }
 
-  @media (4/3 > aspect-ratio) {
+  @media (aspect-ratio < 4/3) {
     grid-template-areas:
       "letters letters"
       "eagle   eagle";
