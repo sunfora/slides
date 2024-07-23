@@ -113,7 +113,6 @@ a {
 nav ol {
   list-style-position: inside;
   a {
-  
     overflow: hidden;
   }
   li span {
@@ -148,9 +147,6 @@ nav ol {
 }
 
 /* position number in center */ 
-nav ol a li span {
-  display: none;
-}
 nav ol a {
   white-space: nowrap;
   text-overflow: clip;
