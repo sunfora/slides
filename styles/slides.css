@@ -45,11 +45,7 @@
     grid-area: eagle;
   }
 
-  grid-template-areas:
-    "letters eagle"
-    "letters eagle";
   @media (aspect-ratio >= 4/3)  {
-    background: red;
     grid-template-areas:
       "letters eagle"
       "letters eagle";
