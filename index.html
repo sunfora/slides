@@ -505,9 +505,17 @@
     }
     
     const SPEED = 1200;
+    let id;
 
-    let id = setInterval(cycle, SPEED);
-    
+    function run() {
+      id = setInterval(
+        () => {
+          window.requestAnimationFrame(cycle)
+        }
+        , SPEED
+      );
+    }
+    run();
     window.addEventListener(
       "beforeprint",
       () => {
@@ -517,11 +525,7 @@
     });
 
     window.addEventListener(
-      "afterprint",
-      () => {
-        reorderOnScreen(coords);
-        id = setInterval(cycle, SPEED);
-      }
+      "afterprint", run
     );
 
   </script>
