@@ -450,6 +450,8 @@
       return 1;
     }
     
+    const SWAP_SPEED = 1000;
+
     function translate(cell, sorc, dest) {
         const {width: width, height: heigth} = cell.getBoundingClientRect();
         const [sorcY, sorcX] = sorc;
@@ -466,7 +468,7 @@
           transformOrigin: 'top left',
           transform: `translate(${dx}px, ${dy}px)`
         }, {
-          duration: 1000,
+          duration: SWAP_SPEED,
           easing: 'ease'
         });
 
@@ -504,21 +506,20 @@
     const SPEED = 1200;
     let id;
 
-    function run() {
+    function resume() {
+      reorderOnScreen(coords);
       id = setInterval(cycle, SPEED);
     }
-    run();
-    window.addEventListener(
-      "beforeprint",
-      () => {
-        clearInterval(id);
-        cells.forEach(c => c.getAnimations().forEach(a => a.cancel()));
-        reorderOnScreen(original);
-    });
+    
+    function stop() {
+      clearInterval(id);
+      cells.forEach(c => c.getAnimations().forEach(a => a.finish()));
+      reorderOnScreen(original);
+    }
 
-    window.addEventListener(
-      "afterprint", run
-    );
+    window.addEventListener("beforeprint", stop);
+    window.addEventListener("afterprint", resume); 
 
+    resume();
   </script>
 </html>
