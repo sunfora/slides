@@ -7,60 +7,7 @@
     <link rel="stylesheet" href="styles/reset.css">
     <link rel="stylesheet" media="screen" href="styles/display.css">
     <link rel="stylesheet" media="print" href="styles/print.css">
-
-    <style>
-      body {
-        font-family: "Tex Gyre Heros", "Helvetica Neue", "Helvetica", "Arial", sans-serif;
-        font-size: 10px;
-        line-height: 1.5;
-      }
-
-
-      img {
-        max-width: 100%;
-      }
-
-      .slide {
-        --pattern-background-dots: 
-          radial-gradient(#ccc 10%, transparent 10%) 
-          center/10px 10px repeat;
-
-        font-size: 2em;
-      }
-      
-      .container {
-        container-type: size;
-      }
-
-      #intro {
-        padding: 2em;
-        @container (orientation: landscape) {
-          display: flex;
-          align-items: center;
-          h1 {
-            flex: 1.5;
-            margin: 0;
-          }
-          gap: 2em;
-          figure {
-            flex: 1;
-          }
-        }
-        
-        h1 {
-          font-size: 6em;
-          text-align: center;
-        }
-
-        figure {
-          filter: saturate(30%);
-        }
-
-
-        background: var(--pattern-background-dots);
-        color: #333a48;
-      }
-    </style>
+    <link rel="stylesheet" href="styles/slides.css">
   </head>
   <body>
     <article class="presentation">

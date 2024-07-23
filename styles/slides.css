@@ -1,0 +1,40 @@
+.slide {
+  --pattern-background-dots: 
+    radial-gradient(#ccc 10%, transparent 10%) 
+    center/10px 10px repeat;
+
+  font-size: 2em;
+}
+
+.container {
+  container-type: size;
+}
+
+#intro {
+  padding: 2em;
+  @container (orientation: landscape) {
+    display: flex;
+    align-items: center;
+    h1 {
+      flex: 1.5;
+      margin: 0;
+    }
+    gap: 2em;
+    figure {
+      flex: 1;
+    }
+  }
+  
+  h1 {
+    font-size: 6em;
+    text-align: center;
+  }
+
+  figure {
+    filter: saturate(30%);
+  }
+
+
+  background: var(--pattern-background-dots);
+  color: #333a48;
+}
