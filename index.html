@@ -362,9 +362,13 @@
     };
 
     const slides = new Slides(document.querySelector("article"));
-    document.querySelector(".fullscreen").addEventListener(
-          "click", 
-          () => slides.slideWindow.requestFullscreen()
-    );
+    if (slides.slideWindow.requestFullscreen) {
+      document.querySelector(".fullscreen").addEventListener(
+            "click", 
+            () => slides.slideWindow.requestFullscreen()
+      );
+    } else {
+      document.querySelector(".fullscreen").style.display = "none";
+    }
   </script>
 </html>
