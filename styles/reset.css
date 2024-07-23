@@ -11,7 +11,15 @@ img {
   max-width: 100%;
 }
 
+html {
+  font-size: 1.5vmin;
+}
+
 body {
   font-family: "Tex Gyre Heros", "Helvetica Neue", "Helvetica", "Arial", sans-serif;
   line-height: 1.5;
+}
+
+ul {
+  padding-inline-start: 2.5em;
 }

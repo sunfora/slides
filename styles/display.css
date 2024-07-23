@@ -1,3 +1,7 @@
+.presentation {
+  --naviagtion-font-size: 1.5rem; 
+}
+
 /* pin presentation to full screen */
 body {
   width: 100vw;
@@ -80,8 +84,8 @@ nav {
   align-items: center;
   overflow: clip;
   img {
-    width: 1.5em;
-    height: 1.5em;
+    width: calc(1.5 * var(--naviagtion-font-size));
+    height: calc(1.5 * var(--naviagtion-font-size));
     transition: 0.3s;
   }
   grid-column: 12;
@@ -89,7 +93,7 @@ nav {
   border: none;
   background-color: #0000;
   img:hover {
-    transform: scale(1.4);
+    transform: scale(1.5);
   }
 }
 
@@ -107,6 +111,7 @@ nav ol {
 
 a {
   text-decoration: none;
+  font-size: var(--naviagtion-font-size);
 }
 
 /* hide any text in links */
