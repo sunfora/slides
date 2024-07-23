@@ -112,9 +112,6 @@ a {
 /* hide any text in links */
 nav ol {
   list-style-position: inside;
-  a {
-    overflow: hidden;
-  }
   li span {
     font-size: 0;
     line-height: 0;
@@ -148,8 +145,6 @@ nav ol {
 
 /* position number in center */ 
 nav ol a {
-  white-space: nowrap;
-  text-overflow: clip;
   display: flex;
   align-items: center;
   justify-content: center;
