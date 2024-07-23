@@ -498,13 +498,13 @@
             transformOrigin: 'top left',
             transform: 'none'
           }], {
-            duration: 300,
+            duration: 500,
             easing: 'ease'
           });
       }
     }
     
-    let id = setInterval(cycle, 1500);
+    let id = setInterval(cycle, 1000);
     
     window.addEventListener(
       "beforeprint",
@@ -518,7 +518,7 @@
       "afterprint",
       () => {
         reorderOnScreen(coords);
-        id = setInterval(cycle, 1500);
+        id = setInterval(cycle, 1000);
       }
     );
 
