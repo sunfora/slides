@@ -264,7 +264,9 @@
 
         const link = document.createElement("a");
         const li = document.createElement("li");
-        li.textContent = this.name();
+        const text = document.createElement("span");
+        text.textContent = this.name();
+        li.append(text);
         link.append(li);
         link.setAttribute("href", `#${this.id()}`);
         this.link = link;

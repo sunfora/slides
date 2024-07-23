@@ -112,11 +112,8 @@ a {
 /* hide any text in links */
 nav ol {
   list-style-position: inside;
-  li {
-    font-size: 0;
-    &::marker {
-      font-size: initial;
-    }
+  li span {
+    display: none;
   }
 }
 
@@ -146,6 +143,9 @@ nav ol {
 }
 
 /* position number in center */ 
+nav ol a li span {
+  display: none;
+}
 nav ol a {
   white-space: nowrap;
   text-overflow: clip;
