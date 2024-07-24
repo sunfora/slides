@@ -471,7 +471,6 @@
     }
 
     function translate(cell, dest) {
-        window.requestAnimationFrame(() => {
             const current = cell.getBoundingClientRect();
             
             if (cell.style.gridRow    === dest[0] 
@@ -498,10 +497,8 @@
               easing: 'ease'
             });
             
-            translate.pause();
-            translate.currentTime += 10;
             translate.play();
-        });
+            translate.currentTime += 10;
     }
 
     function cycle() {
