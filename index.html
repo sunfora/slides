@@ -452,33 +452,56 @@
     
     const SWAP_SPEED = 1000;
 
-    function translate(cell, sorc, dest) {
-        const {width: width, height: heigth} = cell.getBoundingClientRect();
-        const [sorcY, sorcX] = sorc;
+    function getFinalPosition(cell, dest) {
+        const grid = cell.parentElement;
+        const {gridX, gridY, gridWidth, gridHeight} = grid.getBoundingClientRect();
+
         const [destY, destX] = dest;
 
-        if (destX === sorcX && destY === sorcY) {
-          return;
-        }
-
-        const dx = (destX - sorcX) * width;
-        const dy = (destY - sorcY) * heigth;
-        
-        const translate = cell.animate({
-          transformOrigin: 'top left',
-          transform: `translate(${dx}px, ${dy}px)`
-        }, {
-          duration: SWAP_SPEED,
-          easing: 'ease'
-        });
-
-        const place = () => {
-          cell.style.gridRow = dest[0];
-          cell.style.gridColumn = dest[1];
+        return {
+            x: gridX + (destX - 1) * (gridWidth / 3),
+            y: gridY + (destY - 1) * (gridHeight / 3)
         };
+    }
+      
+    const eps = 1e-4;
 
-        translate.onfinish = place;
-        translate.oncancel = place;
+    function onTheSamePosition(a, b) {
+      return Math.abs(a.x - b.x) <= eps && Math.abs(a.y - b.y) <= eps;
+    }
+
+    function translate(cell, dest) {
+        window.requestAnimationFrame(() => {
+            const current = cell.getBoundingClientRect();
+            
+            if (cell.style.gridRow    === dest[0] 
+             && cell.style.gridColumn === dest[1]) {
+              return;
+            }
+
+            cell.style.gridRow = dest[0];
+            cell.style.gridColumn = dest[1];
+
+            const final = cell.getBoundingClientRect();
+            
+            const dx = - (final.x - current.x);
+            const dy = - (final.y - current.y);
+            
+            const translate = cell.animate([{
+              transformOrigin: 'top left',
+              transform: `translate(${dx}px, ${dy}px)`
+            }, {
+              transformOrigin: 'top left',
+              transform: 'none'
+            }], {
+              duration: SWAP_SPEED,
+              easing: 'ease'
+            });
+            
+            translate.pause();
+            translate.currentTime += 10;
+            translate.play();
+        });
     }
 
     function cycle() {
@@ -497,7 +520,7 @@
       }
       
       cells.forEach((e, i) => {
-        translate(e, before[i], coords[i]);
+        translate(e, coords[i]);
       });
       
       iteration += 1;
