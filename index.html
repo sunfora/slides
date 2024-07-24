@@ -486,6 +486,8 @@
             const dx = - (final.x - current.x);
             const dy = - (final.y - current.y);
             
+            cell.style.transform = `translate(${dx}px ${dy}px)`;
+              
             const translate = cell.animate([{
               transformOrigin: 'top left',
               transform: `translate(${dx}px, ${dy}px)`
@@ -497,8 +499,12 @@
               easing: 'ease'
             });
             
-            translate.play();
-            translate.currentTime += 10;
+            translate.onfinish = () => {
+              cell.style.transform = "";
+            }
+            translate.oncancel = () => {
+              cell.style.transform = "";
+            }
     }
 
     function cycle() {
