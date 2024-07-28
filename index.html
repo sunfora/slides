@@ -26,7 +26,7 @@
           <section class="slide" id="intro" data-name="Начало">
             <h1><span>П</span><span>р</span><span>о</span><span>в</span><span>е</span><span>р</span><span>к</span><span>и</span><span>.</span></h1>
               <figure>
-                <img src="ministry-of-justice-emblem.png">
+                <img src="ministry-of-justice-emblem.png" alt="минюст">
               </figure>
           </section>
         </div>
@@ -251,7 +251,7 @@
       </section>
 
     </article>
-  <body>
+  </body>
 
   <script>
     class Slide {
@@ -451,32 +451,48 @@
     }
     
     const SWAP_SPEED = 1000;
+    
+    function findFinalPosition(cell, dest) {
+      const grid = cell.parentElement;
+      const gridRect = grid.getBoundingClientRect();
+      const cellRect = cell.getBoundingClientRect();
+      return {
+        x: gridRect.x + (dest[1] - 1) * (cellRect.width),
+        y: gridRect.y + (dest[0] - 1) * (cellRect.height)
+      };
+    }
 
+    function calculateTranslation(src, dst) {
+      return {
+        transformOrigin: 'top left',
+        transform: `translate(${dst.x - src.x}px, ${dst.y - src.y}px)`
+      };
+    }
+    
     function translate(cell, sorc, dest) {
-        const {width: width, height: heigth} = cell.getBoundingClientRect();
         const [sorcY, sorcX] = sorc;
         const [destY, destX] = dest;
 
         if (destX === sorcX && destY === sorcY) {
           return;
         }
-
-        const dx = (destX - sorcX) * width;
-        const dy = (destY - sorcY) * heigth;
         
-        const translate = cell.animate({
-          transformOrigin: 'top left',
-          transform: `translate(${dx}px, ${dy}px)`
-        }, {
-          duration: SWAP_SPEED,
-          easing: 'ease'
-        });
+        const final = findFinalPosition(cell, dest);
+        const from = cell.getBoundingClientRect();
+
+        const translate = cell.animate(
+          calculateTranslation(from, final)
+          , {
+            duration: SWAP_SPEED,
+            easing: 'ease'
+          }
+        );
 
         const place = () => {
           cell.style.gridRow = dest[0];
           cell.style.gridColumn = dest[1];
         };
-
+        
         translate.onfinish = place;
         translate.oncancel = place;
     }
