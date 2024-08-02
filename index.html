@@ -8,6 +8,9 @@
     <link rel="stylesheet" media="screen" href="styles/display.css">
     <link rel="stylesheet" media="print" href="styles/print.css">
     <link rel="stylesheet" href="styles/slides.css">
+
+    <script src="scripts/slides.js" defer></script>
+    <script src="scripts/intro-animation.js" defer></script>
   </head>
   <body>
     <article class="presentation">
@@ -24,10 +27,20 @@
       <section class="slides"> 
         <div class="container">
           <section class="slide" id="intro" data-name="Начало">
-            <h1><span>П</span><span>р</span><span>о</span><span>в</span><span>е</span><span>р</span><span>к</span><span>и</span><span>.</span></h1>
-              <figure>
-                <img src="ministry-of-justice-emblem.png" alt="минюст">
-              </figure>
+            <h1>
+              <span>П</span>
+              <span>р</span>
+              <span>о</span>
+              <span>в</span>
+              <span>е</span>
+              <span>р</span>
+              <span>к</span>
+              <span>и</span>
+              <span>.</span>
+            </h1>
+            <figure>
+              <img src="ministry-of-justice-emblem.png" alt="минюст">
+            </figure>
           </section>
         </div>
         
@@ -249,293 +262,6 @@
           </section>
         </div>
       </section>
-
     </article>
   </body>
-
-  <script>
-    class Slide {
-      constructor(slide, index, id=null, name=null) {
-        this.data = slide;
-        this.index = index;
-        
-        this.setName(name);
-        this.setId(id);
-
-        const link = document.createElement("a");
-        const li = document.createElement("li");
-        const text = document.createElement("span");
-        text.textContent = this.name();
-        li.append(text);
-        link.append(li);
-        link.setAttribute("href", `#${this.id()}`);
-        this.link = link;
-      }
-
-      firstHeader() {
-        for (const index of [1, 2, 3, 4, 5, 6]) {
-          const h = this.data.querySelector(`h${index}`);
-          if (h !== null) {
-            return h.textContent;
-          }
-        }
-        return null;
-      }
-
-      setName(name) {
-        return this.data.setAttribute("data-name", 
-            name ?? this.data.getAttribute("data-name")
-                 ?? this.firstHeader()
-                 ?? `slide ${this.index + 1}`
-        );
-      }
-
-      name() {
-        return this.data.getAttribute("data-name")
-      }
-      
-      setId(id) {
-        this.data.setAttribute("id",
-          id ?? this.data.getAttribute("id")
-             ?? `slide-${this.index + 1}`
-        );
-      }
-
-      id() {
-        return this.data.getAttribute("id");
-      }
-
-      isSelected() {
-        return this.link.classList.contains("current");
-      }
-
-      select() {
-        this.link.classList.add("current");
-      }
-      unselect() {
-        this.link.classList.remove("current");
-      }
-    }
-
-    function Slides(presentation) {
-      this.presentation = presentation;
-      this.navList = this.presentation.querySelector("nav ol");
-      this.slideWindow = this.presentation.querySelector(".slides");
-      
-      // register slides 
-      const all = this.slideWindow
-                      .querySelectorAll(".slide");
-      this.slides = [...all].map(
-        (data, index) => new Slide(data, index));
-
-      // activate navigation 
-      this.slides.forEach(
-        slide => this.navList.append(slide.link));
-      this.length = this.slides.length;
-      this.actualize();
-      
-      this.slideWindow.addEventListener(
-        "scroll", 
-        () => this.actualize()
-      );
-
-      const isChromium = !!window.chrome;
-      this.slideWindow.addEventListener(
-            isChromium? "scrollend" : "scroll", 
-            () => this.current.link.scrollIntoView({
-              behavior: "auto",
-              inline: "center"
-            })
-      );
-    }
-
-    Slides.prototype.actualize = function() {
-      const slideWidth = this.slideWindow.scrollWidth / (this.length);
-      const index = Math.round(this.slideWindow.scrollLeft / slideWidth);
-      
-      if (this.current) {
-        this.current.unselect();
-      }
-
-      this.current = this.slides[index]; 
-      this.current.select();
-    };
-
-    const slides = new Slides(document.querySelector("article"));
-    if (slides.slideWindow.requestFullscreen) {
-      document.querySelector(".fullscreen").addEventListener(
-            "click", 
-            () => slides.slideWindow.requestFullscreen()
-      );
-    } else {
-      document.querySelector(".fullscreen").style.display = "none";
-    }
-  </script>
-
-  <script>
-
-    const intro = document.querySelector("#intro");
-    const cells = [...intro.querySelectorAll("h1 span")];
-    const dot = intro.querySelector("h1 .dot");
-
-    /* hardcoded */
-    const original = [
-      [1, 1], [1, 2], [2, 1],
-      [1, 3], [2, 2], [2, 3],
-      [3, 1], [3, 2], [3, 3]
-    ];
-
-    let coords = [...original];
-
-    function find(pos) {
-      return coords.findIndex((p) => p[0] == pos[0] && p[1] == pos[1]);
-    }
-    
-    function pick(a) {
-      return a[Math.round(Math.random() * (a.length - 1))];
-    }
-
-    function current() {
-      return coords[coords.length - 1];
-    }
-    
-    function calc(pos, move) {
-      const [x, y] = pos;
-      const [dx, dy] = move;
-      return [x + dx, y + dy];
-    }
-
-    function valid(pos, move) {
-      const [x, y] = calc(pos, move);
-      return (1 <= x && x <= 3)
-          && (1 <= y && y <= 3);
-    }
-    
-    function move(src) {
-      const moves = [[0, 1], [0, -1], [1, 0], [-1, 0]];
-      let move = pick(moves);
-      while (!valid(src, move)) {
-        move = pick(moves);
-      }
-
-      return move;
-    }
-
-    function reorderOnScreen(positions) {
-      for (let i = 0; i < cells.length; i++) {
-        const [row, column] = positions[i];
-        cells[i].style.gridRow = row;
-        cells[i].style.gridColumn = column;
-      }
-    }
-    
-    function swap(src, dest) {
-      const i = find(src);
-      const j = find(dest);
-      coords[i] = dest;
-      coords[j] = src;
-    }
-
-    let iteration = 0;
-
-    function lex([a, b], [c, d]) {
-      if (a < c) {
-        return -1;
-      }
-      if ((a === c) &&  b < d) {
-        return -1;
-      } else if ((a===c) & b===d) {
-        return 0;
-      }
-      return 1;
-    }
-    
-    const SWAP_SPEED = 1000;
-    
-    function findFinalPosition(cell, dest) {
-      const grid = cell.parentElement;
-      const gridRect = grid.getBoundingClientRect();
-      const cellRect = cell.getBoundingClientRect();
-      return {
-        x: gridRect.x + (dest[1] - 1) * (cellRect.width),
-        y: gridRect.y + (dest[0] - 1) * (cellRect.height)
-      };
-    }
-
-    function calculateTranslation(src, dst) {
-      return {
-        transformOrigin: 'top left',
-        transform: `translate(${dst.x - src.x}px, ${dst.y - src.y}px)`
-      };
-    }
-    
-    function translate(cell, sorc, dest) {
-        const [sorcY, sorcX] = sorc;
-        const [destY, destX] = dest;
-
-        if (destX === sorcX && destY === sorcY) {
-          return;
-        }
-        
-        const final = findFinalPosition(cell, dest);
-        const from = cell.getBoundingClientRect();
-
-        const translate = cell.animate(
-          calculateTranslation(from, final)
-          , {
-            duration: SWAP_SPEED,
-            easing: 'ease'
-          }
-        );
-
-        const place = () => {
-          cell.style.gridRow = dest[0];
-          cell.style.gridColumn = dest[1];
-        };
-        
-        translate.onfinish = place;
-        translate.oncancel = place;
-    }
-
-    function cycle() {
-      before = [...coords];
-
-      if (iteration % 3 === 0) {
-        coords = 
-          [...coords.slice(0, 3).sort(lex), 
-           ...coords.slice(3, 6).sort(lex), 
-           ...coords.slice(6, 8).sort(lex), 
-           ...coords.slice(8, 9)];
-      } else {
-        const src = current();
-        const dest = calc(src, move(src));
-        swap(src, dest); 
-      }
-      
-      cells.forEach((e, i) => {
-        translate(e, before[i], coords[i]);
-      });
-      
-      iteration += 1;
-    }
-
-    const SPEED = 1200;
-    let id;
-
-    function resume() {
-      reorderOnScreen(coords);
-      id = setInterval(cycle, SPEED);
-    }
-    
-    function stop() {
-      clearInterval(id);
-      cells.forEach(c => c.getAnimations().forEach(a => a.finish()));
-      reorderOnScreen(original);
-    }
-
-    window.addEventListener("beforeprint", stop);
-    window.addEventListener("afterprint", resume); 
-
-    resume();
-  </script>
 </html>
