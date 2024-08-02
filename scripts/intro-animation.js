@@ -68,7 +68,7 @@ function lex([a, b], [c, d]) {
   }
   if ((a === c) &&  b < d) {
     return -1;
-  } else if ((a===c) & b===d) {
+  } else if ((a===c) && b===d) {
     return 0;
   }
   return 1;
@@ -156,7 +156,7 @@ function pause() {
   cells.forEach(c => c.getAnimations().forEach(a => a.finish()));
 }
 
-function stop() {
+function restore() {
   pause();
   reorderOnScreen(original);
 }
