@@ -1,5 +1,8 @@
 class Slide {
   constructor(slide, index, id=null, name=null) {
+    this.onselect = () => {};
+    this.onlurk = () => {}; 
+
     this.data = slide;
     this.index = index;
     
@@ -55,55 +58,60 @@ class Slide {
 
   select() {
     this.link.classList.add("current");
+    this.onselect(this);
   }
+
   unselect() {
     this.link.classList.remove("current");
+    this.onlurk(this);
   }
 }
 
-function Slides(presentation) {
-  this.presentation = presentation;
-  this.navList = this.presentation.querySelector("nav ol");
-  this.slideWindow = this.presentation.querySelector(".slides");
-  
-  // register slides 
-  const all = this.slideWindow
-                  .querySelectorAll(".slide");
-  this.slides = [...all].map(
-    (data, index) => new Slide(data, index));
+class Slides {
+  constructor(presentation) {
+    this.presentation = presentation;
+    this.navList = this.presentation.querySelector("nav ol");
+    this.slideWindow = this.presentation.querySelector(".slides");
+    
+    // register slides 
+    const all = this.slideWindow
+                    .querySelectorAll(".slide");
+    this.slides = [...all].map(
+      (data, index) => new Slide(data, index));
 
-  // activate navigation 
-  this.slides.forEach(
-    slide => this.navList.append(slide.link));
-  this.length = this.slides.length;
-  this.actualize();
-  
-  this.slideWindow.addEventListener(
-    "scroll", 
-    () => this.actualize()
-  );
+    // activate navigation 
+    this.slides.forEach(
+      slide => this.navList.append(slide.link));
+    this.length = this.slides.length;
+    this.#actualize();
+    
+    this.slideWindow.addEventListener(
+      "scroll", 
+      () => this.#actualize()
+    );
 
-  const isChromium = !!window.chrome;
-  this.slideWindow.addEventListener(
-        isChromium? "scrollend" : "scroll", 
-        () => this.current.link.scrollIntoView({
-          behavior: "auto",
-          inline: "center"
-        })
-  );
-}
-
-Slides.prototype.actualize = function() {
-  const slideWidth = this.slideWindow.scrollWidth / (this.length);
-  const index = Math.round(this.slideWindow.scrollLeft / slideWidth);
-  
-  if (this.current) {
-    this.current.unselect();
+    const isChromium = !!window.chrome;
+    this.slideWindow.addEventListener(
+          isChromium? "scrollend" : "scroll", 
+          () => this.current.link.scrollIntoView({
+            behavior: "auto",
+            inline: "center"
+          })
+    );
   }
 
-  this.current = this.slides[index]; 
-  this.current.select();
-};
+  #actualize() {
+    const slideWidth = this.slideWindow.scrollWidth / (this.length);
+    const index = Math.round(this.slideWindow.scrollLeft / slideWidth);
+    
+    if (this.current) {
+      this.current.unselect();
+    }
+
+    this.current = this.slides[index]; 
+    this.current.select();
+  }
+}
 
 const slides = new Slides(document.querySelector("article"));
 if (slides.slideWindow.requestFullscreen) {
