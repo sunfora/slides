@@ -112,13 +112,3 @@ class Slides {
     this.current.select();
   }
 }
-
-const slides = new Slides(document.querySelector("article"));
-if (slides.slideWindow.requestFullscreen) {
-  document.querySelector(".fullscreen").addEventListener(
-        "click", 
-        () => slides.slideWindow.requestFullscreen()
-  );
-} else {
-  document.querySelector(".fullscreen").style.display = "none";
-}
