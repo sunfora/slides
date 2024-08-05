@@ -83,21 +83,44 @@ class Slides {
     this.slides.forEach(
       slide => this.navList.append(slide.link));
     this.length = this.slides.length;
-    this.#actualize();
     
+    this.#actualize();
+
     this.slideWindow.addEventListener(
       "scroll", 
-      () => this.#actualize()
+      () => {
+        this.#actualize();
+      }
     );
 
     const isChromium = !!window.chrome;
     this.slideWindow.addEventListener(
-          isChromium? "scrollend" : "scroll", 
-          () => this.current.link.scrollIntoView({
-            behavior: "auto",
-            inline: "center"
-          })
+      isChromium? "scrollend" : "scroll", 
+      () => this.#scrollNav() 
     );
+  
+    window.addEventListener(
+      "hashchange",
+      (e) => 
+      {
+          e.preventDefault();
+          document.querySelector(location.hash).scrollIntoView();
+      }
+    );
+    window.addEventListener(
+      "DOMContentLoaded",
+      () => 
+      {
+          document.querySelector(location.hash).scrollIntoView();
+      }
+    );
+  }
+  #scrollNav() {
+    this.#actualize();
+    this.current.link.scrollIntoView({
+      behavior: "auto",
+      inline: "center"
+    });
   }
 
   #actualize() {
