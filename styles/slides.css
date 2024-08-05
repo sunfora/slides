@@ -146,3 +146,41 @@
   grid-template-rows: 26vmin 26vmin 26vmin;
 }
 
+.slide {
+  font-size: 1.5em;
+}
+
+.two-types {
+  display: grid;
+  grid-template-columns: 1fr 1fr;
+  grid-template-rows: 1fr 9fr;
+  column-gap: 0.25em;
+  h2 {
+    grid-row: 1;
+    grid-column: 1 / 3;
+  }
+
+  .scheduled, .unscheduled {
+    * {
+      margin: 0;
+      padding: 0;
+    }
+    
+    ul, ol {
+      padding-inline-start: 2.5rem;
+    }
+
+    padding: 0 0.5em;
+    h3 {
+      margin: 1em 0; 
+    }
+
+    border: 1px dashed black;
+  }
+
+  .scheduled {
+  }
+
+  .unscheduled {
+  }
+}
