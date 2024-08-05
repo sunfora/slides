@@ -151,22 +151,38 @@
 }
 
 .two-types {
+  overflow: scroll;
   h2 {
     column-span: all;
+    border-bottom: 1px solid black;
+    margin-top: 0;
+    background-color: black;
+    color: white;
+    padding: 0.5em;
   }
   
-  columns: 2;
+  @media (orientation: landscape) {
+    columns: 2;
+  }
 
   .scheduled, .unscheduled {
+    margin-bottom: 1em;
+    @media (orientation: portrait) {
+      box-shadow: 2px 2px 4px rgb(0, 0, 0, 0.05);
+    }
+
+    margin-bottom: 1.5em;
+
     break-inside: avoid;
     padding: 0.5em;
+    border-top: 1px dashed black;
     h3 { 
       margin-top: 0;
     }
 
-    background: linear-gradient(
-      whitesmoke,
-      white
+    background-image: linear-gradient(
+      rgb(0, 0, 0, 0.025),
+      transparent
     );
   }
 }
