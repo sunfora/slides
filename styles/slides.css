@@ -148,6 +148,13 @@
 
 .slide {
   font-size: 1.5em;
+  h2 {
+    font-size: 1.5em;
+    background-color: black;
+    color: white;
+    margin-top: 0;
+    padding: 0.5em;
+  }
 }
 
 #types {
@@ -168,13 +175,7 @@
   overflow-y: scroll;
   scrollbar-width: none;
   h2 {
-    font-size: 1.5em;
     column-span: all;
-    border-bottom: 1px solid black;
-    margin-top: 0;
-    background-color: black;
-    color: white;
-    padding: 0.5em;
   }
   
   @media (orientation: landscape) {
