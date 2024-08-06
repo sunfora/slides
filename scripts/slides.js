@@ -111,7 +111,18 @@ class Slides {
       "DOMContentLoaded",
       () => 
       {
-          document.querySelector(location.hash).scrollIntoView();
+        document.querySelector(location.hash).scrollIntoView();
+      }
+    );
+
+    window.addEventListener(
+      "resize",
+      () => {
+        this.current.data.scrollIntoView(
+          {
+            behavior: "instant"
+          }
+        );
       }
     );
   }
