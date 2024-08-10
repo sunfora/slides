@@ -157,7 +157,7 @@
   }
 }
 
-#types {
+.two-types.start-of-section {
   @media (orientation: landscape) {
     display: grid;
     grid-template-rows: 9fr 1fr;
@@ -182,7 +182,7 @@
     columns: 2;
   }
 
-  .scheduled, .unscheduled {
+  section {
     margin-bottom: 1em;
     @media (orientation: portrait) {
       box-shadow: 2px 2px 4px rgb(0, 0, 0, 0.05);
@@ -208,42 +208,45 @@
       transparent
     );
   }
-  .scheduled {
+
+  .scheduled, .documentary {
     background-image: linear-gradient(
       rgb(0, 176, 145, 0.075),
       transparent
     );
+
+    h3 {
+      background: radial-gradient(
+        circle at 0% 100%, 
+        #0a607b,
+        #007b8f, 
+        #009697, 
+        #59e063,
+        #00b091, 
+        #00ca7f 
+      );
+      color: white;
+    }
   }
-  .unscheduled {
+
+  .unscheduled, .on-site {
     background-image: linear-gradient(
       rgb(255, 185, 20, 0.125),
       transparent
     );
-  }
 
-  .scheduled h3 {
-    background: radial-gradient(
-      circle at 0% 100%, 
-      #0a607b,
-      #007b8f, 
-      #009697, 
-      #59e063,
-      #00b091, 
-      #00ca7f 
-    );
-    color: white;
-  }
-  .unscheduled h3 {
-    background: 
-      radial-gradient(
-        circle at 0% 100%, 
-        #ff3d0c,
-        #ff5e00,
-        #ff7800,
-        #ffdf42, 
-        #ffcc2c, 
-        #ffb914
-      ); 
-    color: white;
+    h3 {
+      background: 
+        radial-gradient(
+          circle at 0% 100%, 
+          #ff3d0c,
+          #ff5e00,
+          #ff7800,
+          #ffdf42, 
+          #ffcc2c, 
+          #ffb914
+        ); 
+      color: white;
+    }
   }
 }
