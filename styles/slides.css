@@ -153,6 +153,7 @@
 
 .slide {
   overflow-y: scroll;
+  scrollbar-width: none;
 
   font-size: 1.5em;
 
