@@ -155,51 +155,31 @@
   overflow-y: scroll;
 
   font-size: 1.5em;
+
+  --gap: 1.5rem;
+
   h2 {
-    font-size: 1.5em;
+    font-size: 2em;
+
     background-color: black;
     color: white;
-    margin-top: 0;
+
+    margin: 0;
+    margin-bottom: var(--gap);
+
     padding: 0.5em;
   }
 }
 
-.two-types.start-of-section {
-  @media (orientation: landscape) {
-    display: grid;
-    grid-template-rows: 9fr 1fr;
-    grid-template-columns: 1fr 1fr;
-    gap: 1em;
-    h2 {
-      grid-row: 2;
-      grid-column: 1/3;
-      margin: 0;
-    }
   }
-}
-
-.two-types {
-  h2 {
-    column-span: all;
-  }
-  
-  @media (orientation: landscape) {
-    columns: 2;
   }
 
-  section {
-    margin-bottom: 1em;
-    @media (orientation: portrait) {
-      box-shadow: 2px 2px 4px rgb(0, 0, 0, 0.05);
-    }
+/* law expo basic styles */
+.law-expo {
+  .content {
+    box-shadow: 2px 2px 4px rgb(0, 0, 0, 0.05);
 
-    margin-bottom: 1.5em;
-
-    break-inside: avoid;
-
-    list-style-position: inside;
-
-    h3 ~ * {
+    > * {
       padding: 0 1.5em;
     }
 
@@ -208,18 +188,62 @@
       padding: 0.5em;
     }
 
-    background-image: linear-gradient(
-      rgb(0, 0, 0, 0.025),
-      transparent
-    );
+    list-style-position: inside;
+  }
+}
+
+/* basic layout for two types */
+.two-types {
+  @media (orientation: portrait) {
+    display: flex;
+    flex-direction: column;
+    > * {
+      flex: 1;
+    }
+
+    h2 {
+      flex: none;
+    }
   }
 
-  .scheduled, .documentary {
-    background-image: linear-gradient(
-      rgb(0, 176, 145, 0.075),
-      transparent
-    );
+  @media (orientation: landscape) {
+    display: grid;
+    grid-template-rows: 1fr 9fr;
+    grid-template-columns: 1fr 1fr;
 
+    h2, section {
+      margin: 0;
+    }
+    gap: var(--gap);
+
+    h2 {
+      grid-row: 1;
+      grid-column: 1 / 3;
+    }
+
+  }
+}
+
+/* start of section layout */
+.two-types.start-of-section {
+  @media (orientation: portrait) {
+    h2 {
+      order: 1;
+    }
+  }
+  @media (orientation: landscape) {
+    grid-template-rows: 9fr 1fr;
+    h2 {
+      grid-row: 2;
+    }
+  }
+}
+
+
+
+.two-types {
+
+  .scheduled, .documentary {
     h3 {
       background: radial-gradient(
         circle at 0% 100%, 
@@ -235,11 +259,6 @@
   }
 
   .unscheduled, .on-site {
-    background-image: linear-gradient(
-      rgb(255, 185, 20, 0.125),
-      transparent
-    );
-
     h3 {
       background: 
         radial-gradient(
