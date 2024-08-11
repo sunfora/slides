@@ -171,8 +171,15 @@
   }
 }
 
+.note-inline {
+  background-color: rgb(245, 255, 245);
+  &::before {
+    content: "[";
   }
+  &::after {
+    content: "]";
   }
+}
 
 /* law expo basic styles */
 .law-expo {
