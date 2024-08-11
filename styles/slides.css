@@ -29,6 +29,11 @@
   }
 }
 
+/* disable scrolling */
+#intro {
+  overflow-y: clip;
+}
+
 #intro {
   padding: 0;
 
@@ -147,6 +152,8 @@
 }
 
 .slide {
+  overflow-y: scroll;
+
   font-size: 1.5em;
   h2 {
     font-size: 1.5em;
@@ -172,8 +179,6 @@
 }
 
 .two-types {
-  overflow-y: scroll;
-  scrollbar-width: none;
   h2 {
     column-span: all;
   }
