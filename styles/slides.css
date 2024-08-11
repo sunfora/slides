@@ -255,3 +255,9 @@
     }
   }
 }
+
+#which-form {
+  .on-site {
+    grid-column: 1 / 3;
+  }
+}
