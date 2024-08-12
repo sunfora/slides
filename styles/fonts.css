@@ -1,0 +1,11 @@
+:root {
+  --inter: "Inter", sans-serif;
+  --helvetica: "Tex Gyre Heros", "Helvetica Neue", "Helvetica", "Arial", sans-serif;
+  font-feature-settings: 'liga' 1, 'calt' 1;
+}
+
+@supports (font-variation-settings: normal) {
+  :root { 
+    --inter: "InterVariable", sans-serif;
+  }
+}
