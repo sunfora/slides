@@ -393,7 +393,13 @@
   @media (orientation: landscape) {
     h2 {
       order: 0;
-      writing-mode: sideways-lr;
+      @supports (writing-mode: sideways-lr) {
+        writing-mode: sideways-lr;
+      }
+      @supports not (writing-mode: sideways-lr) {
+        writing-mode: vertical-lr;
+        transform: rotate(180deg);
+      }
     }
   }
 }
