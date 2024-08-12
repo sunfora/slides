@@ -195,6 +195,8 @@
   }
 
   .content {
+    border-radius: 0.5rem;
+
     box-shadow: 2px 2px 4px rgb(0, 0, 0, 0.05);
 
     > * {
@@ -202,6 +204,8 @@
     }
 
     h3 { 
+      border-top-left-radius: 0.5rem;
+      border-top-right-radius: 0.5rem;
       margin-top: 0;
       padding: 0.5em;
     }
