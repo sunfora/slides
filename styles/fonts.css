@@ -4,8 +4,10 @@
   font-feature-settings: 'liga' 1, 'calt' 1;
 }
 
-@supports (font-variation-settings: normal) {
-  :root { 
-    --inter: "InterVariable", sans-serif;
+@media screen {
+  @supports (font-variation-settings: normal) {
+    :root { 
+      --inter: "InterVariable", sans-serif;
+    }
   }
 }
