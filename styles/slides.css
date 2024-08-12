@@ -151,6 +151,10 @@
   grid-template-rows: 26vmin 26vmin 26vmin;
 }
 
+#intro {
+  font-family: var(--helvetica);
+}
+
 .slide {
   overflow-y: scroll;
   scrollbar-width: none;
@@ -206,6 +210,18 @@
   }
 }
 
+.law-expo {
+  font-family: var(--inter);
+  h2 {
+    font-family: var(--helvetica);
+  }
+  .content {
+    h3 {
+      font-family: var(--helvetica);
+    }
+  }
+}
+
 /* basic layout for two types */
 .two-types {
   @media (orientation: portrait) {
@@ -255,8 +271,6 @@
     }
   }
 }
-
-
 
 .two-types {
   .scheduled, .documentary {
