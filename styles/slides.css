@@ -228,7 +228,7 @@
 
 /* basic backgrounds */
 .law-expo {
-  background: whitesmoke;
+  background: var(--pattern-background-dots), rgb(0, 0, 0, 0.02);
   .content {
     background: white; 
   }
@@ -255,7 +255,7 @@
 
   @media (orientation: landscape) {
     display: grid;
-    grid-template-rows: 1fr 9fr;
+    grid-template-rows: auto auto 1fr;
     grid-template-columns: 1fr 1fr;
 
     h2, .content {
@@ -274,66 +274,31 @@
 .law-expo {
   .scheduled {
     h3 {
-      background: radial-gradient(
-        circle at 0% 100%, 
-        hsl(169deg, 85%,  38%),
-        hsl(163deg, 100%, 38%),
-        hsl(155deg, 100%, 45%),
-        hsl(140deg, 69%,  65%),
-        hsl(140deg, 68%, 62%),
-        hsl(163deg, 100%, 40%)      
-      );
+      background: hsl(169deg, 70%,  50%);
       color: white;
     }
   }
 
   .unscheduled {
     h3 {
-      background: 
-        radial-gradient(
-          circle at 0% 100%, 
-          hsl(12deg, 100%, 52%),
-          hsl(22deg, 100%, 50%),
-          hsl(28deg, 100%, 50%),
-          hsl(50deg, 100%, 63%), 
-          hsl(45deg, 100%, 59%), 
-          hsl(42deg, 100%, 54%)
-        ); 
+      background: hsl(12deg, 70%, 55%);
       color: white;
     }
   }
 
   .documentary {
     h3 {
-      background: radial-gradient(
-        circle at 0% 100%, 
-        hsl(215deg, 85%, 48%),
-        hsl(215deg, 100%, 51%),
-        hsl(215deg, 100%, 50%),
-        hsl(194deg, 69%, 55%),
-        hsl(194deg, 100%, 50%),
-        hsl(203deg, 100%, 40%)      
-      );
+      background: hsl(215deg, 30%, 48%);
       color: white;
     }
   }
 
   .on-site {
     h3 {
-      background: 
-        radial-gradient(
-          circle at 0% 100%, 
-          hsl(282deg, 100%, 52%),
-          hsl(292deg, 100%, 50%),
-          hsl(298deg, 100%, 50%),
-          hsl(320deg, 100%, 68%), 
-          hsl(315deg, 100%, 61%), 
-          hsl(312deg, 100%, 54%)
-        ); 
+      background: hsl(282deg, 30%, 52%);
       color: white;
     }
   }
-
 }
 
 #prerequisites-forms {
