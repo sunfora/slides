@@ -226,6 +226,14 @@
   }
 }
 
+/* basic backgrounds */
+.law-expo {
+  background: whitesmoke;
+  .content {
+    background: white; 
+  }
+}
+
 /* basic layout for two types */
 .two-types {
   @media (orientation: portrait) {
@@ -281,37 +289,69 @@
   }
 }
 
-.two-types {
-  .scheduled, .documentary {
+.law-expo {
+  .scheduled {
     h3 {
       background: radial-gradient(
         circle at 0% 100%, 
-        #0a607b,
-        #007b8f, 
-        #009697, 
-        #59e063,
-        #00b091, 
-        #00ca7f 
+        hsl(169deg, 85%,  38%),
+        hsl(163deg, 100%, 38%),
+        hsl(155deg, 100%, 45%),
+        hsl(140deg, 69%,  65%),
+        hsl(140deg, 68%, 62%),
+        hsl(163deg, 100%, 40%)      
       );
       color: white;
     }
   }
 
-  .unscheduled, .on-site {
+  .unscheduled {
     h3 {
       background: 
         radial-gradient(
           circle at 0% 100%, 
-          #ff3d0c,
-          #ff5e00,
-          #ff7800,
-          #ffdf42, 
-          #ffcc2c, 
-          #ffb914
+          hsl(12deg, 100%, 52%),
+          hsl(22deg, 100%, 50%),
+          hsl(28deg, 100%, 50%),
+          hsl(50deg, 100%, 63%), 
+          hsl(45deg, 100%, 59%), 
+          hsl(42deg, 100%, 54%)
         ); 
       color: white;
     }
   }
+
+  .documentary {
+    h3 {
+      background: radial-gradient(
+        circle at 0% 100%, 
+        hsl(215deg, 85%, 48%),
+        hsl(215deg, 100%, 51%),
+        hsl(215deg, 100%, 50%),
+        hsl(194deg, 69%, 55%),
+        hsl(194deg, 100%, 50%),
+        hsl(203deg, 100%, 40%)      
+      );
+      color: white;
+    }
+  }
+
+  .on-site {
+    h3 {
+      background: 
+        radial-gradient(
+          circle at 0% 100%, 
+          hsl(282deg, 100%, 52%),
+          hsl(292deg, 100%, 50%),
+          hsl(298deg, 100%, 50%),
+          hsl(320deg, 100%, 68%), 
+          hsl(315deg, 100%, 61%), 
+          hsl(312deg, 100%, 54%)
+        ); 
+      color: white;
+    }
+  }
+
 }
 
 #which-form {
