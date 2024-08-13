@@ -211,6 +211,11 @@
   margin-block-end: var(--gap);
 }
 
+#restrictions {
+  details {
+    margin-inline-start: 1.5em;
+  }
+}
 
 /* law expo basic styles */
 .slide {
@@ -219,6 +224,13 @@
     color: black;
     font-weight: normal;
   }
+}
+
+.aux-content {
+  padding: 0.5em 1.5em;
+  background: black;
+  color: white;
+  border-radius: 0.5rem;
 }
 
 .slide {
