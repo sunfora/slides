@@ -186,35 +186,42 @@
   }
 }
 
+.content:has(h3) {
+  padding: 0;
+  padding-block-end: 0.5em;
+  h3 { 
+    border-top-left-radius: 0.5rem;
+    border-top-right-radius: 0.5rem;
+    margin-top: 0;
+    padding: 0.5em;
+  }
+}
+
+.content {
+  border-radius: 0.5rem;
+  padding: 0.5rem;
+
+  box-shadow: 2px 2px 4px rgb(0, 0, 0, 0.05);
+  
+  > * {
+    padding: 0 1.5rem;
+  }
+
+  list-style-position: inside;
+  margin-block-end: var(--gap);
+}
+
+
 /* law expo basic styles */
-.law-expo {
+.slide {
   strong {
     background-color: aliceblue;
     color: black;
     font-weight: normal;
   }
-
-  .content {
-    border-radius: 0.5rem;
-
-    box-shadow: 2px 2px 4px rgb(0, 0, 0, 0.05);
-
-    > * {
-      padding: 0 1.5em;
-    }
-
-    h3 { 
-      border-top-left-radius: 0.5rem;
-      border-top-right-radius: 0.5rem;
-      margin-top: 0;
-      padding: 0.5em;
-    }
-
-    list-style-position: inside;
-  }
 }
 
-.law-expo {
+.slide {
   font-family: var(--inter);
   h2 {
     font-family: var(--helvetica);
@@ -227,7 +234,6 @@
 }
 
 /* basic backgrounds */
-.law-expo {
   background: var(--pattern-background-dots), rgb(0, 0, 0, 0.02);
   .content {
     background: white; 
