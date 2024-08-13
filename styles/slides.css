@@ -234,7 +234,8 @@
 }
 
 /* basic backgrounds */
-  background: var(--pattern-background-dots), rgb(0, 0, 0, 0.02);
+.slide {
+  background: rgb(0, 0, 0, 0.02);
   .content {
     background: white; 
   }
