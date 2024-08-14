@@ -164,3 +164,11 @@ nav a.current li {
   transform: rotate(30deg);
   font-weight: bold;
 }
+
+.footnotes-container {
+  display: none;
+}
+
+.on-print {
+  display: none;
+}

@@ -93,6 +93,46 @@ class Slides {
       }
     );
 
+    // activate footnotes
+    const footnotes = document.querySelector(".footnotes");
+
+    const addFootnote = (note, id) => {
+      const summary = note.querySelector("summary");
+      const content = note.querySelector(".aux-content").cloneNode(true);
+
+      const forward = `footnote-${id}`;
+      const backref = `footnote-backref-${id}`;
+      
+      const footnote = document.createElement("span");
+      footnote.classList.add("footnote-id");
+      footnote.classList.add("on-print");
+
+      const forwardLink = document.createElement("a");
+      forwardLink.setAttribute("href", `#${forward}`);
+      forwardLink.textContent = id;
+      footnote.append(forwardLink);
+      footnote.setAttribute("id", backref);
+
+      summary.append(footnote);
+
+      const p = document.createElement("p");
+      const backlink = document.createElement("a");
+      const li = document.createElement("li");
+      backlink.setAttribute("href", `#${backref}`);
+      li.setAttribute("id", forward);
+      backlink.textContent = "↑";
+      p.append(backlink);
+      content.append(p);
+      li.append(content);
+      footnotes.append(li);
+    }
+
+    const grabFootnotes = slide => {
+      return [...slide.data.querySelectorAll("details")];
+    }
+
+    this.slides.flatMap(grabFootnotes).forEach((f, i) => addFootnote(f, i + 1));
+
     const isChromium = !!window.chrome;
     this.slideWindow.addEventListener(
       isChromium? "scrollend" : "scroll", 

@@ -19,5 +19,66 @@ nav {
   width: 100vw;
   min-height: 100vh;
   page-break-after: always;
-  padding: 1em;
+  padding: 1.5rem;
+  font-size: 1.5rem;
+  h2 {
+    font-size: 2em;
+  }
+  li {
+    padding-left: 0.5rem;
+  }
+}
+
+.on-print {
+  display: inline;
+}
+
+.on-screen {
+  display: none;
+  pointer-events: none;
+}
+
+.footnotes-container {
+  padding: 1.5rem;
+  padding-inline-end: calc(40px + 1.5rem);
+  font-size: 1.5rem;
+  h2 {
+    font-size: 2em;
+  }
+}
+
+.footnotes > li {
+  break-inside: avoid;
+  padding-block-start: calc(1.5rem + 40px);
+  a {
+    text-decoration: none;
+    color: pink;
+  }
+}
+
+.footnote-id {
+  vertical-align: super;
+  background: black;
+  color: pink;
+  margin: 0.5em;
+  &::before {
+    content: "[";
+  }
+  &::after {
+    content: "]";
+  }
+  a {
+    color: inherit;
+  }
+}
+
+summary {
+  pointer-events: none;
+}
+details {
+  pointer-events: none;
+}
+
+summary a {
+  pointer-events: auto;
 }
