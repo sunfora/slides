@@ -211,9 +211,33 @@
   margin-block-end: var(--gap);
 }
 
-#restrictions {
-  details {
-    margin-inline-start: 1.5em;
+details {
+  margin-inline-start: 1.5em;
+}
+
+q {
+  font-family: serif;
+  background-color: rgb(240, 255, 255);
+}
+
+
+#conduct-for-regular {
+  .content-group {
+    display: flex;
+  }
+  .content:has(img) {
+    flex: 1;
+  }
+  .content:not(:has(img)) {
+    flex: 2;
+  }
+  .content {
+    margin-inline-end: var(--gap);
+  }
+  @media (orientation: portrait) {
+    .content-group {
+      flex-flow: column nowrap;
+    }
   }
 }
 
