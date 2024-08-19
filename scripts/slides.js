@@ -15,7 +15,7 @@ class Slide {
     text.textContent = this.name();
     li.append(text);
     link.append(li);
-    link.setAttribute("href", `#${this.id()}`);
+    link.href = `#${this.id()}`;
     this.link = link;
   }
 
@@ -108,7 +108,7 @@ class Slides {
       footnote.classList.add("on-print");
 
       const forwardLink = document.createElement("a");
-      forwardLink.setAttribute("href", `#${forward}`);
+      forwardLink.href = `#${forward}`;
       forwardLink.textContent = id;
       footnote.append(forwardLink);
       footnote.setAttribute("id", backref);
@@ -118,7 +118,7 @@ class Slides {
       const p = document.createElement("p");
       const backlink = document.createElement("a");
       const li = document.createElement("li");
-      backlink.setAttribute("href", `#${backref}`);
+      backlink.href = `#${backref}`;
       li.setAttribute("id", forward);
       backlink.textContent = "↑";
       p.append(backlink);
